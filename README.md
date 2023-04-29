@@ -2,7 +2,7 @@
 -Edit .ruby-version to the version of Ruby you want to use then 
 
 #2. Bundle Install
-```bash
+```ruby
 bundle install
 
 #3. Database
