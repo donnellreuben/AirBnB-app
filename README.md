@@ -6,18 +6,18 @@
 bundle install
 
 #3. Database
-```bash
+```ruby
 rails db:setup 
 
 #4. Server, either
-```bash
+```ruby
 rails server 
 or 
-```bash
+```ruby
 bin/dev *recommended*
 
 #5. To view AirBnb
-```bash
+```ruby
 -localhost:3000
 
 
