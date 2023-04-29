@@ -2,7 +2,8 @@
 -Edit .ruby-version to the version of Ruby you want to use then 
 
 #2. Bundle Install
-```bundle install
+```console
+bundle install
 
 #3. Database
 ```rails db:setup 
