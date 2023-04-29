@@ -1,15 +1,15 @@
-Check Ruby Version
+# Check Ruby Version
 -Edit .ruby-version to the version of Ruby you want to use then 
 
-Bundle Install
+# Bundle Install
 ```ruby
 bundle install
 ```
-#3. Database
+# Database
 ```ruby
 rails db:setup 
 ```
-#4. Server, either
+# Server, either
 ```ruby
 rails server 
 ```
@@ -17,7 +17,7 @@ or
 ```ruby
 bin/dev *recommended*
 ```
-#5. To view AirBnb
+# To view AirBnb
 ```ruby
 -localhost:3000
 ```
