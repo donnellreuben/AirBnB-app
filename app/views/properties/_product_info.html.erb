@@ -1,0 +1,95 @@
+<!-- Product info -->
+<div class="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
+  <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+    <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">Entire rental unit hosted by Fliphaus</h1>
+  </div>
+
+  <!-- Reservation Component -->
+  <div
+    class="mt-4 lg:mt-0 lg:row-span-3"
+    data-controller="reservation-component"
+    data-default-checkin-date="<%= Date.tomorrow.to_formatted_s(:us_short_date) %>"
+    data-default-checkout-date="<%= (Date.tomorrow + 1.day).to_formatted_s(:us_short_date) %>"
+    data-nightly-price="<%= humanized_money(@property.price) %>"
+    data-service-fee-percentage="<%= Property::SERVICE_FEE_PERCENTAGE %>"
+    data-cleaning-fee="<%= humanized_money(Property::CLEANING_FEE_MONEY) %>"
+  >
+    <div class="mt-10 lg:mt-0">
+      <h2 class="text-2xl font-medium text-gray-900"><%= humanized_money_with_symbol(@property.price) %> night</h2>
+
+      <div class="isolate -space-y-px rounded-md shadow-sm mt-6">
+        <div class="relative border border-gray-300 rounded-md rounded-b-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+          <label for="name" class="block text-xs font-medium text-gray-900 uppercase">Check-in</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+            placeholder="11/30/2022"
+            data-reservation-component-target="checkin"
+          >
+        </div>
+        <div class="relative border border-gray-300 rounded-md rounded-t-none px-3 py-2 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+          <label for="job-title" class="block text-xs font-medium text-gray-900 uppercase">Checkout</label>
+          <input
+            type="text"
+            name="job-title"
+            id="job-title"
+            class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+            placeholder="12/7/2022"
+            data-reservation-component-target="checkout"
+          >
+        </div>
+      </div>
+
+      <div class="bg-white mt-6">
+        <div class="divide-y divide-gray-200">
+        </div>
+        <dl class="space-y-6">
+          <div class="flex items-center justify-between">
+            <dt class="text-sm"><%= humanized_money_with_symbol(@property.price) %> x <span data-reservation-component-target="numOfNights">0</span> nights</dt>
+            <dd class="text-sm font-medium text-gray-900">$<span data-reservation-component-target="nightlyTotal">0.00</span></dd>
+          </div>
+          <div class="flex items-center justify-between">
+            <dt class="text-sm">Cleaning fee</dt>
+            <dd class="text-sm font-medium text-gray-900"><%= humanized_money_with_symbol Property::CLEANING_FEE_MONEY %></dd>
+          </div>
+          <div class="flex items-center justify-between">
+            <dt class="text-sm">Service fee</dt>
+            <dd class="text-sm font-medium text-gray-900">$<span data-reservation-component-target="serviceFee">0.00</span></dd>
+          </div>
+          <div class="flex items-center justify-between border-t border-gray-200 pt-6">
+            <dt class="text-base font-medium">Total</dt>
+            <dd class="text-base font-medium text-gray-900">$<span data-reservation-component-target="total">0.00</span></dd>
+          </div>
+        </dl>
+
+        <div class="pt-6">
+          <button
+            data-submit-url="<%= new_property_reservation_path(@property) %>"
+            data-action="reservation-component#submitReservationComponent"
+            type="submit"
+            class="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">Confirm order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+    <!-- Description and details -->
+    <div>
+      <h3 class="sr-only">Description</h3>
+
+      <div class="space-y-6">
+        <p class="text-base text-gray-900"><%= truncate @property.description, length: 500 %></p>
+
+        <% if @property.description.length > 500 %>
+          <%= link_to "Show more >", "", class: "text-lg font-medium underline", data: { action: "property#readDescription" } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "shared/modal", modal_trigger_id: "property-description-trigger", modal_content: "properties/property_description", content_params: { property: @property } %>

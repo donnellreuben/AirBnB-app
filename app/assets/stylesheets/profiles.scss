@@ -1,0 +1,16 @@
+.profiles-sidebar {
+  a.active {
+    background-color: rgb(249, 250, 251) !important;
+    color: rgb(234, 88, 12) !important;
+    &:hover {
+      background-color: white !important;
+    }
+
+    svg {
+      color: rgb(234, 88, 12) !important;
+      &:hover {
+        color: rgb(234, 88, 12) !important;
+      }
+    }
+  }
+}

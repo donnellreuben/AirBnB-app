@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vacation Homes & Condo Rentals - Airbnb - Airbnb</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path("airbnb-favicon.png") %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker.min.css">
+
+    <% if controller_name == "reservations" && action_name == "new" %>
+      <%= stripe_javascript_tag %>
+    <% end %>
+
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLl3WCbi7osM_VQ-ENKgXxQrHWI4pdUsc&callback=initMap">
+    </script>
+  </head>
+
+  <body>
+    <%= render "layouts/header" %>
+    <%= yield %>
+  </body>
+</html>

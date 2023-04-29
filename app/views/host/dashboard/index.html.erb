@@ -1,0 +1,64 @@
+<div class="h-full bg-gray-100">
+  <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+      <%= render "host/dashboard/sidebar" %>
+
+      <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+        <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+          <div class="ml-4 mt-2">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Your Properties</h3>
+          </div>
+          <div class="ml-4 mt-2 flex-shrink-0">
+            <%= link_to "Create new property", new_host_property_path, class: "relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          </div>
+        </div>
+        <div class="bg-white shadow overflow-hidden sm:rounded-md">
+          <ul role="list" class="divide-y divide-gray-200">
+            <% @properties.each do |property| %>
+              <li>
+                <%= link_to property_path(property), class: "block hover:bg-gray-50" do %>
+                  <div class="flex items-center px-4 py-4 sm:px-6">
+                    <div class="min-w-0 flex-1 flex items-center">
+                      <div class="flex-shrink-0">
+                        <%= image_tag property.default_image, class: "h-12 w-12 rounded-full" %>
+                      </div>
+                      <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                        <div>
+                          <p class="text-sm font-medium text-indigo-600 truncate"><%= property.name %></p>
+                          <p class="mt-2 flex items-center text-sm text-gray-500">
+                            <span class="truncate"><%= property.headline %></span>
+                          </p>
+                        </div>
+                        <div class="hidden md:block">
+                          <div>
+                            <p class="text-sm text-gray-900">
+                              Created on
+                              <time><%= property.created_at.to_formatted_s(:us_short_date) %></time>
+                            </p>
+                            <p class="mt-2 flex items-center text-sm text-gray-500">
+                              <!-- Heroicon name: solid/check-circle -->
+                              <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                              </svg>
+                              <%= property.reservations.future_reservations.size %> Active Reservations
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <!-- Heroicon name: solid/chevron-right -->
+                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

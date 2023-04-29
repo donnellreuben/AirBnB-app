@@ -1,0 +1,13 @@
+<div class="container mx-auto" data-controller="google-maps">
+  <div class="grid grid-cols-5 gap-4">
+    <div class="col-span-2">
+      <ul role="list" class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-x-6 lg:grid-cols-2">
+        <%= render partial: "properties/property", collection: @properties, as: :property %>
+      </ul>
+    </div>
+
+    <div class="col-span-3">
+      <div data-google-maps-target="map"></div>
+    </div>
+  </div>
+</div>
