@@ -1,3 +1,5 @@
+# If you want to add your own database from scratch, remove this seeds file before db:setup. If you end up already using db:setup, just do db:drop and then try again 😄.
+
 user_pictures = []
 
 6.times do
